@@ -1,6 +1,6 @@
 const Movie = require("../models/movie.model");
 
-exports.getAllMovies = async (req, res) => {
+const getAllMovies = async (req, res) => {
   try {
     const movies = await Movie.find();
     res.json(movies);
@@ -9,7 +9,7 @@ exports.getAllMovies = async (req, res) => {
   }
 };
 
-exports.getMovieById = async (req, res) => {
+const getMovieById = async (req, res) => {
   try {
     const movie = await Movie.findById(req.params.id);
     if (movie) {
@@ -22,7 +22,7 @@ exports.getMovieById = async (req, res) => {
   }
 };
 
-exports.createMovie = async (req, res) => {
+const createMovie = async (req, res) => {
   const {
     title,
     genre,
@@ -49,7 +49,7 @@ exports.createMovie = async (req, res) => {
   }
 };
 
-exports.updateMovie = async (req, res) => {
+const updateMovie = async (req, res) => {
   const {
     title,
     genre,
@@ -79,11 +79,19 @@ exports.updateMovie = async (req, res) => {
   }
 };
 
-exports.deleteMovie = async (req, res) => {
+const deleteMovie = async (req, res) => {
   try {
     await Movie.findByIdAndDelete(req.params.id);
     res.json({ message: "Movie deleted" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+
+module.exports = {
+  getAllMovies,
+  getMovieById,
+  createMovie,
+  updateMovie,
+  deleteMovie,
 };
