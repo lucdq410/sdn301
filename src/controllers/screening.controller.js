@@ -6,30 +6,29 @@ const createScreening = async (req, res) => {
   const { movie, hall, startTime, endTime } = req.body;
 
   try {
-    // Tìm kiếm phim dựa trên tên
-    const movieDoc = await Movie.findOne({ title: movie });
-    if (!movieDoc) {
-      return res.status(200).json({
+    // Kiểm tra sự tồn tại của movie và hall
+    const movieExists = await Movie.findById(movie);
+    const hallExists = await Hall.findById(hall);
+
+    if (!movieExists) {
+      return res.status(404).json({
         data: null,
         message: "Movie not found",
         isSuccess: false,
       });
     }
 
-    // Kiểm tra sự tồn tại của hall
-    const hallDoc = await Hall.findById(hall);
-    if (!hallDoc) {
-      return res.status(200).json({
+    if (!hallExists) {
+      return res.status(404).json({
         data: null,
         message: "Hall not found",
         isSuccess: false,
       });
     }
 
-    // Tạo một lịch chiếu phim mới
     const newScreening = new Screening({
-      movie: movieDoc._id,
-      hall: hallDoc._id,
+      movie,
+      hall,
       startTime,
       endTime,
     });
@@ -41,7 +40,7 @@ const createScreening = async (req, res) => {
       isSuccess: true,
     });
   } catch (error) {
-    res.status(200).json({
+    res.status(400).json({
       data: null,
       message: error.message,
       isSuccess: false,

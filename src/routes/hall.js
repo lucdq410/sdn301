@@ -24,6 +24,10 @@ const hallController = require("../controllers/hall.controller");
  *         capacity:
  *           type: integer
  *           format: int32
+ *         status:
+ *           type: string
+ *           enum: [active, inactive]
+ *           default: active
  */
 
 /**
@@ -43,7 +47,7 @@ const hallController = require("../controllers/hall.controller");
  *               items:
  *                 $ref: '#/components/schemas/Hall'
  */
-router.get("/halls", hallController.getAllHalls);
+router.get("/", hallController.getAllHalls);
 
 /**
  * @swagger
@@ -69,7 +73,7 @@ router.get("/halls", hallController.getAllHalls);
  *       404:
  *         description: Hall not found
  */
-router.get("/halls/:id", hallController.getHallById);
+router.get("/:id", hallController.getHallById);
 
 /**
  * @swagger
@@ -94,7 +98,7 @@ router.get("/halls/:id", hallController.getHallById);
  *       400:
  *         description: Invalid input
  */
-router.post("/halls", hallController.createHall);
+router.post("/", hallController.createHall);
 
 /**
  * @swagger
@@ -128,7 +132,7 @@ router.post("/halls", hallController.createHall);
  *       400:
  *         description: Invalid input
  */
-router.put("/halls/:id", hallController.updateHall);
+router.put("/:id", hallController.updateHall);
 
 /**
  * @swagger
@@ -150,6 +154,6 @@ router.put("/halls/:id", hallController.updateHall);
  *       404:
  *         description: Hall not found
  */
-router.delete("/halls/:id", hallController.deleteHall);
+router.delete("/:id", hallController.deleteHall);
 
 module.exports = router;

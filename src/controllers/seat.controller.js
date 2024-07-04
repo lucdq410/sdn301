@@ -58,7 +58,7 @@ const createSeat = async (req, res) => {
     });
 
     const savedSeat = await newSeat.save();
-    res.status(201).json({
+    res.status(200).json({
       data: savedSeat,
       message: "Seat created successfully",
       isSuccess: true,

@@ -17,6 +17,8 @@ const setupSwagger = require("./src/config/swagger");
 const screeningRoutes = require("./src/routes/screenings");
 const hallRoutes = require("./src/routes/hall");
 const seatRoutes = require("./src/routes/seat");
+const slotPickerRoutes = require("./src/routes/slotPicker");
+const ticketRouter = require("./src/routes/ticket");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -37,9 +39,12 @@ app.use("/users", usersRouter);
 app.use("/auther", auther);
 app.use("/mv", movieRouter);
 app.use("/booking", bookingRouter);
-app.use("/", screeningRoutes);
+app.use("/screenings", screeningRoutes);
+app.use("/", ticketRouter);
 app.use("/", seatRoutes);
 app.use("/", hallRoutes);
+app.use("/slotpicker", slotPickerRoutes);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
