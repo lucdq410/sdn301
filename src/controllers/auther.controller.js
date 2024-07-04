@@ -12,7 +12,7 @@ const register = async (req, res) => {
     });
     // Check if all required fields are provided
     if (!name || !email || !password || !confirmPassword) {
-      return res.status(400).json({
+      return res.status(200).json({
         message: "All fields are required",
         data: null,
         isSuccess: false,
@@ -92,7 +92,7 @@ const login = async (req, res) => {
     // Respond with success and token
     res.status(200).json({
       message: "Login successful",
-      data: { token: token },
+      data: { token: token, role: user.role },
       isSuccess: true,
     });
   } catch (error) {

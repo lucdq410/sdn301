@@ -12,6 +12,8 @@ var app = express();
 var { connectDB } = require("./src/config/configDB");
 var cors = require("cors");
 var movieRouter = require("./src/routes/movies");
+const bookingRouter = require("./src/routes/booking");
+const setupSwagger = require("./src/config/swagger");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -26,10 +28,12 @@ app.use(cors({ origin: "*" }));
 
 dotenv.config();
 connectDB();
+setupSwagger(app);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/auther", auther);
-app.use("/admin", movieRouter);
+app.use("/mv", movieRouter);
+app.use("/booking", bookingRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

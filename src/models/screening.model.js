@@ -2,28 +2,30 @@ const mongoose = require("mongoose");
 
 const screeningSchema = new mongoose.Schema(
   {
-    movie_id: {
+    movie: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "MOVIE",
-      require: true,
+      ref: "Movie", // Thay "Movie" bằng tên của model movie nếu đã đặt tên khác
+      required: true,
     },
-    hall_id: {
+    hall: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "HALL",
-      require: true,
+      ref: "HALL", // Thay "HALL" bằng tên của model hall nếu đã đặt tên khác
+      required: true,
     },
-    start_time: {
+    startTime: {
       type: Date,
-      require: true,
+      required: true,
     },
-    end_time: {
+    endTime: {
       type: Date,
-      require: true,
+      required: true,
     },
   },
   {
     timestamps: true,
   }
 );
-const Screening = mongoose.model("SCREENING", userSchema);
+
+const Screening = mongoose.model("SCREENING", screeningSchema); // Sử dụng screeningSchema để tạo model Screening
+
 module.exports = Screening;

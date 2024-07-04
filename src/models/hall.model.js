@@ -2,27 +2,25 @@ const mongoose = require("mongoose");
 
 const hallSchema = new mongoose.Schema(
   {
-    cinema_id: {
+    name: {
+      type: String,
+      required: true,
+    },
+    capacity: {
+      type: Number,
+      required: true,
+    },
+    cinema: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "CINEMA",
-      require: true,
-    },
-    hall_number: {
-      type: String,
-      require: true,
-    },
-    total_seats: {
-      type: String,
-      require: true,
-    },
-    screen_type: {
-      type: String,
-      require: true,
+      ref: "CINEMA", // Thay "CINEMA" bằng tên của model cinema nếu đã đặt tên khác
+      required: true,
     },
   },
   {
     timestamps: true,
   }
 );
-const Hall = mongoose.model("HALL", userSchema);
+
+const Hall = mongoose.model("HALL", hallSchema); // Sử dụng hallSchema để tạo model Hall
+
 module.exports = Hall;
