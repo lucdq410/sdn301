@@ -4,31 +4,31 @@ const movieSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     genre: {
       type: String,
-      require: true,
+      required: true,
     },
     duration: {
       type: String,
-      require: true,
+      required: true,
     },
     release_date: {
       type: String,
-      require: true,
+      required: true,
     },
     director: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     poster: {
       type: String,
-      require: true,
+      required: true,
     },
     status: {
       type: String,

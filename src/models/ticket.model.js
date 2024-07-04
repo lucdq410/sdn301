@@ -1,35 +1,33 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ticketSchema = new mongoose.Schema(
-    {
-        slotPicker_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'SLOTPICKER',
-            require: true
-        },
-        user_id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'USER',
-            require: true
-        },
-        seat_number: {
-            type: String,
-            require: true
-        },
-        purchase_date: {
-            type: String,
-            require: true
-        },
-        price: {
-            type: Number,
-            require: true
-        },
-        
+  {
+    slotPicker_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SLOTPICKER",
+      required: true,
     },
-    {
-        timestamps: true
-
-    }
-)
-const Ticket = mongoose.model('TICKET', userSchema)
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "USER",
+      required: true,
+    },
+    seat_number: {
+      type: String,
+      required: true,
+    },
+    purchase_date: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+const Ticket = mongoose.model("TICKET", ticketSchema);
 module.exports = Ticket;

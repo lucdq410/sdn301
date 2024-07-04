@@ -1,4 +1,3 @@
-const Cinema = require("../models/cinema.model");
 const Hall = require("../models/hall.model");
 const Movie = require("../models/movie.model");
 const Screening = require("../models/screening.model");
@@ -74,7 +73,6 @@ const getScreeningsByHallId = async (req, res) => {
 };
 
 module.exports = {
-  getAllCinemas,
   getHallsByCinemaId,
   getAllMovies,
   getScreeningsByHallId,

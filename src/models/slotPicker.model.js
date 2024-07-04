@@ -5,21 +5,22 @@ const slotPickerSchema = new mongoose.Schema(
     seat_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "SEAT",
-      require: true,
+      required: true,
     },
     screening_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "SCREENING",
-      require: true,
+      required: true,
     },
     is_available: {
-      type: true,
-      require: true,
+      type: Boolean,
+      required: true,
+      default: true,
     },
   },
   {
     timestamps: true,
   }
 );
-const SlotPicker = mongoose.model("SLOTPICKER", userSchema);
+const SlotPicker = mongoose.model("SLOTPICKER", slotPickerSchema);
 module.exports = SlotPicker;
