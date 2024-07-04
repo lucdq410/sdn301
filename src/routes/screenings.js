@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const { middlewares, isAdmin } = require("../middlewares/middlewres");
 const screeningController = require("../controllers/screening.controller");
+
 /**
  * @swagger
  * tags:
  *   name: Screening
- *   description: The Screening managing API
+ *   description: API endpoints for managing screenings
  */
+
 /**
  * @swagger
  * components:
@@ -22,16 +23,18 @@ const screeningController = require("../controllers/screening.controller");
  *       properties:
  *         movie:
  *           type: string
- *           description: The name of the movie
+ *           description: The ID of the movie for the screening
  *         hall:
  *           type: string
- *           description: The ID of the hall
+ *           description: The ID of the hall for the screening
  *         startTime:
  *           type: string
  *           format: date-time
+ *           description: The start time of the screening
  *         endTime:
  *           type: string
  *           format: date-time
+ *           description: The end time of the screening
  */
 
 /**
@@ -48,18 +51,15 @@ const screeningController = require("../controllers/screening.controller");
  *           schema:
  *             $ref: '#/components/schemas/Screening'
  *     responses:
- *       200:
- *         description: Screening created successfully or an error occurred
+ *       201:
+ *         description: Screening created successfully
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Screening'
+ *       400:
+ *         description: Invalid input or missing fields
  */
-router.post(
-  "/screenings",
-  middlewares,
-  isAdmin,
-  screeningController.createScreening
-);
+router.post("/", screeningController.createScreening);
 
 module.exports = router;
