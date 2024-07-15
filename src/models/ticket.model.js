@@ -4,12 +4,12 @@ const ticketSchema = new mongoose.Schema(
   {
     slotPicker_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "SlotPicker",
+      ref: "SLOTPICKER",
       required: true,
     },
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "USER",
       required: true,
     },
     seat_number: {
@@ -31,5 +31,5 @@ const ticketSchema = new mongoose.Schema(
   }
 );
 
-const Ticket = mongoose.model("Ticket", ticketSchema);
+const Ticket = mongoose.model("TICKET", ticketSchema);
 module.exports = Ticket;
