@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ticketController = require("../controllers/ticket.controller");
+const { middlewares, isAdmin } = require("../middlewares/middlewres");
 
 /**
  * @swagger
@@ -55,6 +56,7 @@ const ticketController = require("../controllers/ticket.controller");
  */
 router.get("/", ticketController.getAllTickets);
 
+router.get("/user", middlewares, ticketController.getTicketByUser);
 /**
  * @swagger
  * /tickets/{id}:

@@ -1,5 +1,6 @@
 const Ticket = require("../models/ticket.model");
 const SlotPicker = require("../models/slotPicker.model");
+const { path } = require("../../app");
 
 const getAllTickets = async (req, res, next) => {
   try {
@@ -118,6 +119,52 @@ const deleteTicket = async (req, res, next) => {
     next(error);
   }
 };
+const getTicketByUser = async (req, res, next) => {
+  const user_id = req.user._id;
+
+  try {
+    const ticket = await Ticket.find({ user_id: user_id })
+      .populate("slotPicker_id")
+      .populate({
+        path: "slotPicker_id",
+        populate: [
+          {
+            path: "seat_id",
+            populate: {
+              path: "hall_id",
+            },
+          },
+          {
+            path: "screening_id",
+            populate: {
+              path: "movie",
+            },
+          },
+        ],
+      })
+      .sort({ createdAt: -1 });
+
+    if (ticket) {
+      res.status(200).json({
+        data: ticket,
+        message: "Ticket retrieved successfully",
+        isSuccess: true,
+      });
+    } else {
+      res.status(404).json({
+        data: null,
+        message: "Ticket not found",
+        isSuccess: false,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      data: null,
+      message: error.message,
+      isSuccess: false,
+    });
+  }
+};
 
 module.exports = {
   getAllTickets,
@@ -125,4 +172,5 @@ module.exports = {
   createTicket,
   updateTicket,
   deleteTicket,
+  getTicketByUser,
 };

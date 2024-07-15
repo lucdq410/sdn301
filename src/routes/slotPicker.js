@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const slotPickerController = require("../controllers/slotPicker.controller");
+const { middlewares, isAdmin } = require("../middlewares/middlewres");
 
 /**
  * @swagger
@@ -94,5 +95,7 @@ router.get(
  *         description: Slot picker not found
  */
 router.patch("/:id", slotPickerController.editSlotPickerAvailability);
+
+router.post("/pick", middlewares, slotPickerController.pickSlots);
 
 module.exports = router;
