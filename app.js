@@ -40,9 +40,9 @@ app.use("/auther", auther);
 app.use("/mv", movieRouter);
 app.use("/booking", bookingRouter);
 app.use("/screenings", screeningRoutes);
-app.use("/", ticketRouter);
+app.use("/tickets", ticketRouter);
 app.use("/", seatRoutes);
-app.use("/", hallRoutes);
+app.use("/halls", hallRoutes);
 app.use("/slotpicker", slotPickerRoutes);
 
 // catch 404 and forward to error handler

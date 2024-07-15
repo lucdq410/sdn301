@@ -3,7 +3,9 @@ const SlotPicker = require("../models/slotPicker.model");
 
 const getAllTickets = async (req, res, next) => {
   try {
-    const tickets = await Ticket.find().populate("slotPicker_id user_id");
+    const tickets = await Ticket.find()
+      .populate("slotPicker_id")
+      .populate("user_id");
     res.status(200).json({
       data: tickets,
       message: "Tickets retrieved successfully",
@@ -16,9 +18,9 @@ const getAllTickets = async (req, res, next) => {
 
 const getTicketById = async (req, res, next) => {
   try {
-    const ticket = await Ticket.findById(req.params.id).populate(
-      "slotPicker_id user_id"
-    );
+    const ticket = await Ticket.findById(req.params.id)
+      .populate("slotPicker_id")
+      .populate("user_id");
     if (ticket) {
       res.status(200).json({
         data: ticket,
@@ -38,8 +40,7 @@ const getTicketById = async (req, res, next) => {
 };
 
 const createTicket = async (req, res, next) => {
-  const { slotPicker_id, user_id, seat_number, purchase_date, price } =
-    req.body;
+  const { slotPicker_id, user_id, seat_number, price } = req.body;
   try {
     const slotPicker = await SlotPicker.findById(slotPicker_id);
     if (!slotPicker || !slotPicker.is_available) {
@@ -54,7 +55,6 @@ const createTicket = async (req, res, next) => {
       slotPicker_id,
       user_id,
       seat_number,
-      purchase_date,
       price,
     });
     const addedTicket = await newTicket.save();
@@ -73,12 +73,11 @@ const createTicket = async (req, res, next) => {
 };
 
 const updateTicket = async (req, res, next) => {
-  const { slotPicker_id, user_id, seat_number, purchase_date, price } =
-    req.body;
+  const { slotPicker_id, user_id, seat_number, price } = req.body;
   try {
     const ticket = await Ticket.findByIdAndUpdate(
       req.params.id,
-      { slotPicker_id, user_id, seat_number, purchase_date, price },
+      { slotPicker_id, user_id, seat_number, price },
       { new: true }
     ).populate("slotPicker_id user_id");
     if (ticket) {
@@ -101,15 +100,10 @@ const updateTicket = async (req, res, next) => {
 
 const deleteTicket = async (req, res, next) => {
   try {
-    const deletedTicket = await Ticket.findByIdAndDelete(req.params.id);
-    if (deletedTicket) {
-      const slotPicker = await SlotPicker.findById(deletedTicket.slotPicker_id);
-      if (slotPicker) {
-        slotPicker.is_available = true;
-        await slotPicker.save();
-      }
+    const ticket = await Ticket.findByIdAndDelete(req.params.id);
+    if (ticket) {
       res.status(200).json({
-        data: null,
+        data: ticket,
         message: "Ticket deleted successfully",
         isSuccess: true,
       });

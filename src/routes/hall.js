@@ -156,4 +156,32 @@ router.put("/:id", hallController.updateHall);
  */
 router.delete("/:id", hallController.deleteHall);
 
+/**
+ * @swagger
+ * /halls/{id}/seats:
+ *   get:
+ *     tags:
+ *       - Hall
+ *     summary: Get seats of a hall by hall ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The hall ID
+ *     responses:
+ *       200:
+ *         description: A list of seats
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Seat'
+ *       404:
+ *         description: Hall not found
+ */
+router.get("/:id/seats", hallController.getSeatsByHallId);
+
 module.exports = router;

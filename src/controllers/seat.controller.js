@@ -40,7 +40,6 @@ const createSeat = async (req, res) => {
   const { hall_id, price, seat_number, is_available } = req.body;
 
   try {
-    // Check if the hall exists
     const hallExists = await Hall.findById(hall_id);
     if (!hallExists) {
       return res.status(404).json({
@@ -58,7 +57,7 @@ const createSeat = async (req, res) => {
     });
 
     const savedSeat = await newSeat.save();
-    res.status(200).json({
+    res.status(201).json({
       data: savedSeat,
       message: "Seat created successfully",
       isSuccess: true,
@@ -84,6 +83,13 @@ const updateSeat = async (req, res) => {
       },
       { new: true }
     );
+    if (!seat) {
+      return res.status(404).json({
+        data: null,
+        message: "Seat not found",
+        isSuccess: false,
+      });
+    }
     res.status(200).json({
       data: seat,
       message: "Seat updated successfully",
@@ -100,7 +106,14 @@ const updateSeat = async (req, res) => {
 
 const deleteSeat = async (req, res) => {
   try {
-    await Seat.findByIdAndDelete(req.params.id);
+    const deletedSeat = await Seat.findByIdAndDelete(req.params.id);
+    if (!deletedSeat) {
+      return res.status(404).json({
+        data: null,
+        message: "Seat not found",
+        isSuccess: false,
+      });
+    }
     res.status(200).json({
       data: null,
       message: "Seat deleted successfully",

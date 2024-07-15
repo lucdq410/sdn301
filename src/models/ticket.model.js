@@ -4,12 +4,12 @@ const ticketSchema = new mongoose.Schema(
   {
     slotPicker_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "SLOTPICKER",
+      ref: "SlotPicker",
       required: true,
     },
     user_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "USER",
+      ref: "User",
       required: true,
     },
     seat_number: {
@@ -17,7 +17,8 @@ const ticketSchema = new mongoose.Schema(
       required: true,
     },
     purchase_date: {
-      type: String,
+      type: Date,
+      default: Date.now,
       required: true,
     },
     price: {
@@ -29,5 +30,6 @@ const ticketSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Ticket = mongoose.model("TICKET", ticketSchema);
+
+const Ticket = mongoose.model("Ticket", ticketSchema);
 module.exports = Ticket;

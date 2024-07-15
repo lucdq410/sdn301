@@ -51,7 +51,6 @@ const createMovie = async (req, res) => {
     director,
     description,
     poster,
-    status,
   } = req.body;
   try {
     const newMovie = new Movie({
@@ -62,7 +61,6 @@ const createMovie = async (req, res) => {
       director,
       description,
       poster,
-      status,
     });
     const addMovie = await newMovie.save();
     res.status(200).json({
@@ -88,7 +86,6 @@ const updateMovie = async (req, res) => {
     director,
     description,
     poster,
-    status,
   } = req.body;
   try {
     const movie = await Movie.findByIdAndUpdate(
@@ -101,7 +98,6 @@ const updateMovie = async (req, res) => {
         director,
         description,
         poster,
-        status,
       },
       { new: true }
     );

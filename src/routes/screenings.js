@@ -61,5 +61,15 @@ const screeningController = require("../controllers/screening.controller");
  *         description: Invalid input or missing fields
  */
 router.post("/", screeningController.createScreening);
+// Endpoint để xóa screening
+router.delete("/:id", screeningController.deleteScreening);
+// Endpoint để lấy tất cả screenings
+router.get("/", screeningController.getAllScreenings);
+
+// Endpoint để cập nhật screening
+router.put("/:id", screeningController.updateScreening);
+// Endpoint get by id
+router.get("/:id", screeningController.getScreeningById);
+router.get("/movie/:movieId", screeningController.getScreeningsByMovieId);
 
 module.exports = router;

@@ -30,29 +30,11 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    status: {
-      type: String,
-      enum: ["upcoming", "now_showing"],
-      default: "upcoming",
-    },
   },
   {
     timestamps: true,
   }
 );
-
-movieSchema.pre("save", function (next) {
-  const movie = this;
-  const currentDate = new Date().toISOString().split("T")[0];
-
-  if (movie.release_date <= currentDate) {
-    movie.status = "now_showing";
-  } else {
-    movie.status = "upcoming";
-  }
-
-  next();
-});
 
 const Movie = mongoose.model("MOVIE", movieSchema);
 module.exports = Movie;

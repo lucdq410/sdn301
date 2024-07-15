@@ -53,7 +53,7 @@ const ticketController = require("../controllers/ticket.controller");
  *               items:
  *                 $ref: '#/components/schemas/Ticket'
  */
-router.get("/tickets", ticketController.getAllTickets);
+router.get("/", ticketController.getAllTickets);
 
 /**
  * @swagger
@@ -79,7 +79,7 @@ router.get("/tickets", ticketController.getAllTickets);
  *       404:
  *         description: Ticket not found
  */
-router.get("/tickets/:id", ticketController.getTicketById);
+router.get("/:id", ticketController.getTicketById);
 
 /**
  * @swagger
@@ -104,7 +104,7 @@ router.get("/tickets/:id", ticketController.getTicketById);
  *       400:
  *         description: Invalid input
  */
-router.post("/tickets", ticketController.createTicket);
+router.post("/", ticketController.createTicket);
 
 /**
  * @swagger
@@ -138,7 +138,7 @@ router.post("/tickets", ticketController.createTicket);
  *       400:
  *         description: Invalid input
  */
-router.put("/tickets/:id", ticketController.updateTicket);
+router.put("/:id", ticketController.updateTicket);
 
 /**
  * @swagger
@@ -160,6 +160,6 @@ router.put("/tickets/:id", ticketController.updateTicket);
  *       404:
  *         description: Ticket not found
  */
-router.delete("/tickets/:id", ticketController.deleteTicket);
+router.delete("/:id", ticketController.deleteTicket);
 
 module.exports = router;

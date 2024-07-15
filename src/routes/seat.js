@@ -98,6 +98,8 @@ router.get("/seats/:hallId", seatController.getSeatsByHallId);
  *               $ref: '#/components/schemas/Seat'
  *       400:
  *         description: Invalid input
+ *       404:
+ *         description: Hall not found
  */
 router.post("/seats", seatController.createSeat);
 
