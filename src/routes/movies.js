@@ -24,7 +24,6 @@ const movieController = require("../controllers/movie.controller");
  *         - director
  *         - description
  *         - poster
- *         - status
  *       properties:
  *         title:
  *           type: string
@@ -40,11 +39,6 @@ const movieController = require("../controllers/movie.controller");
  *           type: string
  *         poster:
  *           type: string
- *         status:
- *           type: string
- *           enum:
- *             - upcoming
- *             - now_showing
  */
 
 /**
@@ -171,8 +165,7 @@ router.put("/movies/:id", movieController.updateMovie);
  *       404:
  *         description: Movie not found
  */
-router.delete("/movies/:id", movieController.deleteMovie);
+router.delete("/movies/:id", middlewares, isAdmin, movieController.deleteMovie);
 router.get("/", movieController.getAllMovies);
 router.get("/:id", movieController.getMovieById);
-
 module.exports = router;

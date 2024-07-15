@@ -1,25 +1,34 @@
 const mongoose = require("mongoose");
 
-const slotPickerSchema = new mongoose.Schema(
-  {
-    seat_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "SEAT",
-      require: true,
+let SlotPicker;
+
+try {
+  SlotPicker = mongoose.model("SLOTPICKER");
+} catch (error) {
+  const slotPickerSchema = new mongoose.Schema(
+    {
+      seat_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SEAT",
+        required: true,
+      },
+      screening_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SCREENING",
+        required: true,
+      },
+      is_available: {
+        type: Boolean,
+        default: true,
+        required: true,
+      },
     },
-    screening_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "SCREENING",
-      require: true,
-    },
-    is_available: {
-      type: true,
-      require: true,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
-const SlotPicker = mongoose.model("SLOTPICKER", userSchema);
+    {
+      timestamps: true,
+    }
+  );
+
+  SlotPicker = mongoose.model("SLOTPICKER", slotPickerSchema);
+}
+
 module.exports = SlotPicker;

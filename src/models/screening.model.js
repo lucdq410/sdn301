@@ -4,12 +4,12 @@ const screeningSchema = new mongoose.Schema(
   {
     movie: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Movie", // Thay "Movie" bằng tên của model movie nếu đã đặt tên khác
+      ref: "MOVIE",
       required: true,
     },
     hall: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "HALL", // Thay "HALL" bằng tên của model hall nếu đã đặt tên khác
+      ref: "HALL",
       required: true,
     },
     startTime: {
@@ -26,6 +26,6 @@ const screeningSchema = new mongoose.Schema(
   }
 );
 
-const Screening = mongoose.model("SCREENING", screeningSchema); // Sử dụng screeningSchema để tạo model Screening
+const Screening = mongoose.model("SCREENING", screeningSchema);
 
 module.exports = Screening;

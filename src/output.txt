@@ -1,0 +1,42 @@
+Folder PATH listing for volume Data
+Volume serial number is DC7E-2C08
+D:.
+�   output.doc
+�   output.txt
+�   
++---config
+�       configDB.js
+�       swagger.js
+�       
++---controllers
+�       auther.controller.js
+�       booking.controllers.js
+�       movie.controller.js
+�       
++---enums
+�       index.js
+�       user.enums.js
+�       
++---middlewares
+�       middlewres.js
+�       
++---models
+�       cinema.model.js
+�       hall.model.js
+�       movie.model.js
+�       screening.model.js
+�       seat.model.js
+�       slotPicker.model.js
+�       ticket.model.js
+�       users.model.js
+�       
++---routes
+�       auth.js
+�       index.js
+�       movies.js
+�       booking.js
+�       users.js
+�       
++---utils
+        generateToken.js
+        

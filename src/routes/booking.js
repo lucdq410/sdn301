@@ -27,7 +27,7 @@ const bookingController = require("../../src/controllers/booking.controllers");
  *               items:
  *                 $ref: '#/components/schemas/Cinema'
  */
-router.get("/booking/cinemas", bookingController.getAllCinemas);
+// router.get("/booking/cinemas", bookingController.getAllCinemas);
 
 /**
  * @swagger
