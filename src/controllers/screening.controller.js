@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Screening = require("../models/screening.model");
 const Movie = require("../models/movie.model");
 const Hall = require("../models/hall.model");
-const SlotPicker = require("../models/slotpicker.model");
+const SlotPicker = require("../models/slotPicker.model");
 const Seat = require("../models/seat.model"); // Import Seat model
 
 const createScreening = async (req, res) => {
@@ -43,9 +43,9 @@ const createScreening = async (req, res) => {
     }
 
     // Tính thời gian kết thúc dựa trên thời gian bắt đầu và thời lượng phim
-    const durationInMinutes = parseInt(movieExists.duration); // Chuyển đổi duration thành số nguyên
+    const durationInMinutes = parseInt(movieExists.duration, 10); // Chuyển đổi duration thành số nguyên
     const start = new Date(startTime);
-    const end = new Date(start.getTime() + durationInMinutes * 60000); // 60000 milliseconds = 1 phút
+    const end = new Date(start + durationInMinutes * 60000);
 
     // Tiếp tục thực hiện tạo mới screening và slotpicker nếu mọi thứ hợp lệ
     const newScreening = new Screening({
